@@ -52,13 +52,13 @@ public class CheckValidityForSoftware {
 		return softwareId == 0 ? new SoftwareIdNotEmptyException("\nid : " + String.valueOf(softwareId)) : null;
 	}
 
-	public Exception checkSoftwareName(Software software) {
-
-		return softwareRepository.findByNameContainsIgnoreCase(software.getName()).isPresent()
-				? new SoftwareNameNotEqualException(software.toString())
-				: null;
-
-	}
+//	public Exception checkSoftwareName(Software software) {
+//
+//		return softwareRepository.findByNameContainsIgnoreCase(software.getName()).isPresent()
+//				? new SoftwareNameNotEqualException(software.toString())
+//				: null;
+//
+//	}
 
 	public Exception checkSoftwareNameIsEmptyOrNull(Software software) {
 		boolean result = (software.getName() == null || software.getName().isBlank() || software.getName().isEmpty())

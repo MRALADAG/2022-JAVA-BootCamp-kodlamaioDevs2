@@ -1,18 +1,23 @@
 package kodlama.io.Devs2.business.abstracts;
 
 import java.util.List;
+
+import kodlama.io.Devs2.dtos.software.SoftwareRequest;
+import kodlama.io.Devs2.dtos.software.SoftwareResponse;
 import kodlama.io.Devs2.entities.concretes.Software;
 
 public interface SoftwareService {
 
-	Software addSoftware(Software software) throws Exception;
+	SoftwareResponse addSoftware(SoftwareRequest softwareRequest) throws Exception;
 
-	Software updateSoftware(Software software) throws Exception;
+	SoftwareResponse updateSoftware(SoftwareRequest softwareRequest, int id) throws Exception;
 
 	Software getSoftwareById(int softwareId) throws Exception;
 
+	SoftwareResponse getSoftwareResponseById(int softwareId) throws Exception;
+
 	void deleteSoftwareById(int softwareId) throws Exception;
 
-	List<Software> getAllSoftware();
+	List<SoftwareResponse> getAllSoftware();
 
 }

@@ -1,18 +1,23 @@
 package kodlama.io.Devs2.business.abstracts;
 
 import java.util.List;
-import kodlama.io.Devs2.entities.concretes.SoftwareTechnologies;
+import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesRequest;
+import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesResponse;
 
 public interface SoftwareTechnologiesService {
 
-	SoftwareTechnologies addSoftwareTechnologies(SoftwareTechnologies softwareTechnologies) throws Exception;
+	SoftwareTechnologiesResponse addSoftwareTechnologies(SoftwareTechnologiesRequest softwareTechnologiesRequest)
+			throws Exception;
 
-	SoftwareTechnologies updateSoftwareTechnologies(SoftwareTechnologies softwareTechnologies) throws Exception;
+	SoftwareTechnologiesResponse updateSoftwareTechnologies(SoftwareTechnologiesRequest softwareTechnologiesRequest)
+			throws Exception;
 
-	SoftwareTechnologies getSoftwareTechnologiesById(int softwareTechnologiesId) throws Exception;
+	SoftwareTechnologiesResponse getSoftwareTechnologiesById(int softwareTechnologiesId) throws Exception;
 
 	void deleteSoftwareTechnologiesById(int softwareTechnologiesId) throws Exception;
 
-	List<SoftwareTechnologies> getAllSoftwareTechnologies();
+	List<SoftwareTechnologiesResponse> getAllSoftwareTechnologies();
+
+	SoftwareTechnologiesResponse getTechnologiesBySoftwareId(int softwareId);
 
 }

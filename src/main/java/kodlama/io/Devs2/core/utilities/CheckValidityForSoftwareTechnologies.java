@@ -57,13 +57,13 @@ public class CheckValidityForSoftwareTechnologies {
 				: null;
 	}
 
-	public Exception checkSoftwareTechnologiesName(SoftwareTechnologies softwareTechnologies) {
-
-		return softwareTechnologiesRepository.findByNameContainsIgnoreCase(softwareTechnologies.getName()).isPresent()
-				? new SoftwareTechnologiesNameNotEqualException(softwareTechnologies.toString())
-				: null;
-
-	}
+//	public Exception checkSoftwareTechnologiesName(SoftwareTechnologies softwareTechnologies) {
+//
+//		return softwareTechnologiesRepository.findByNameContainsIgnoreCase(softwareTechnologies.getName()).isPresent()
+//				? new SoftwareTechnologiesNameNotEqualException(softwareTechnologies.toString())
+//				: null;
+//
+//	}
 
 	public Exception checkSoftwareTechnologiesNameIsEmptyOrNull(SoftwareTechnologies softwareTechnologies) {
 		boolean result = (softwareTechnologies.getName() == null || softwareTechnologies.getName().isBlank()

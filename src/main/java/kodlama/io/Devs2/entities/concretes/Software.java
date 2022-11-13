@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +31,7 @@ public class Software {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "software", cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = SoftwareTechnologies.class)
+	@OneToMany(mappedBy = "software", cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = SoftwareTechnologies.class, fetch = FetchType.LAZY)
 	private List<SoftwareTechnologies> softwareTechnologies;
 
 	@Override
