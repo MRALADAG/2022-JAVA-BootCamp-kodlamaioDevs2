@@ -1,7 +1,6 @@
 package kodlama.io.Devs2.business.abstracts;
 
 import java.util.List;
-
 import kodlama.io.Devs2.dtos.software.SoftwareRequest;
 import kodlama.io.Devs2.dtos.software.SoftwareResponse;
 import kodlama.io.Devs2.entities.concretes.Software;
@@ -20,4 +19,6 @@ public interface SoftwareService {
 
 	List<SoftwareResponse> getAllSoftware();
 
+	SoftwareResponse addSoftwareTechnologyToSoftware(SoftwareRequest softwareRequest, int softwareTechnologyId)
+			throws Exception;
 }

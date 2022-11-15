@@ -1,5 +1,6 @@
 package kodlama.io.Devs2.entities.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +33,17 @@ public class Software {
 	private String name;
 
 	@OneToMany(mappedBy = "software", cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = SoftwareTechnologies.class, fetch = FetchType.LAZY)
-	private List<SoftwareTechnologies> softwareTechnologies;
+	private List<SoftwareTechnologies> softwareTechnologies = new ArrayList<>();
+
+	public void addSoftwareTechnologies(SoftwareTechnologies softwareTechnology) {
+		softwareTechnology.setSoftware(this);
+		softwareTechnologies.add(softwareTechnology);
+	}
+
+	public void removeSoftwareTechnologies(SoftwareTechnologies softwareTechnology) {
+		softwareTechnology.setSoftware(null);
+		softwareTechnologies.remove(softwareTechnology);
+	}
 
 	@Override
 	public String toString() {

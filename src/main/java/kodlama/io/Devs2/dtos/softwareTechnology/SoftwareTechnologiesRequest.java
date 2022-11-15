@@ -10,7 +10,7 @@ public class SoftwareTechnologiesRequest {
 
 	@Override
 	public String toString() {
-		return "Software : { name : " + getName() + " }";
+		return "Software Technology : { name : " + getName() + " }" + "\nrelated Software id : " + getSoftwareId();
 	}
 
 }

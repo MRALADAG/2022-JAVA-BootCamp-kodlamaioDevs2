@@ -204,9 +204,16 @@ public class SoftwareTechnologiesManager implements SoftwareTechnologiesService 
 	}
 
 	@Override
-	public SoftwareTechnologiesResponse getTechnologiesBySoftwareId(int softwareId) {
-		List<SoftwareTechnologies> softwareTechnologies=softwareTechnologiesRepository.findAllBySoftwareId(softwareId);
-		return null;
+	public SoftwareTechnologiesResponse findTechnologiesById(int softwareTechnologyid) throws Exception {
+		return toModel(softwareTechnologiesRepository.findById(softwareTechnologyid)
+				.orElseThrow(SoftwareTechnologiesNotFoundException::new));
+	}
+
+	@Override
+	public SoftwareTechnologies getTechnologiesBySoftwareId(int softwareTechnologyid) throws Exception {
+		return softwareTechnologiesRepository.findById(softwareTechnologyid).orElseThrow(
+				() -> new SoftwareTechnologiesNotFoundException("\nid: " + String.valueOf(softwareTechnologyid)));
+//		.orElseThrow(SoftwareTechnologiesNotFoundException::new);
 	}
 
 }

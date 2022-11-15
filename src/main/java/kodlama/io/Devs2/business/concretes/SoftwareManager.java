@@ -2,6 +2,7 @@ package kodlama.io.Devs2.business.concretes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -13,18 +14,27 @@ import kodlama.io.Devs2.core.exceptions.SoftwareIdNotEmptyException;
 import kodlama.io.Devs2.core.exceptions.SoftwareNameNotEmptyException;
 import kodlama.io.Devs2.core.exceptions.SoftwareNameNotEqualException;
 import kodlama.io.Devs2.core.exceptions.SoftwareNotFoundException;
+import kodlama.io.Devs2.core.exceptions.SoftwareTechnologiesNotFoundException;
 import kodlama.io.Devs2.core.utilities.CheckValidityForSoftware;
 import kodlama.io.Devs2.dataAccess.abstracts.SoftwareRepository;
+import kodlama.io.Devs2.dataAccess.abstracts.SoftwareTechnologiesRepository;
 import kodlama.io.Devs2.dtos.software.SoftwareRequest;
 import kodlama.io.Devs2.dtos.software.SoftwareResponse;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesResponse;
 import kodlama.io.Devs2.entities.concretes.Software;
+import kodlama.io.Devs2.entities.concretes.SoftwareTechnologies;
 
 @Service
 public class SoftwareManager implements SoftwareService {
 
 	@Autowired
 	private SoftwareRepository softwareRepository;
+
+//	@Autowired
+//	private SoftwareTechnologiesService softwareTechnologiesService;
+
+	@Autowired
+	private SoftwareTechnologiesRepository softwareTechnologiesRepository;
 
 	@Autowired
 	private CheckValidityForSoftware checkValidityForSoftware;
@@ -141,7 +151,7 @@ public class SoftwareManager implements SoftwareService {
 	}
 
 	private boolean isNameValid(String name) {
-		if (!softwareRepository.findAllByNameContainsIgnoreCase(name).isEmpty()) {
+		if (!Objects.isNull(softwareRepository.findByNameEqualsIgnoreCase(name))) {
 			return false;
 		}
 		return true;
@@ -158,7 +168,29 @@ public class SoftwareManager implements SoftwareService {
 		SoftwareResponse response = new SoftwareResponse();
 		response.setId(software.getId());
 		response.setName(software.getName());
+		List<SoftwareTechnologiesResponse> softwareTechnologies = software.getSoftwareTechnologies().stream()
+				.map(item -> {
+					SoftwareTechnologiesResponse techResponse = new SoftwareTechnologiesResponse();
+					techResponse.setId(item.getId());
+					techResponse.setName(item.getName());
+					techResponse.setSoftwareId(item.getSoftware().getId());
+					return techResponse;
+				}).collect(Collectors.toList());
+
+		response.setSoftwareTechnologiesResponse(softwareTechnologies);
 		return response;
+	}
+
+	@Override
+	public SoftwareResponse addSoftwareTechnologyToSoftware(SoftwareRequest softwareRequest, int softwareTechnologyId)
+			throws Exception {
+//		SoftwareTechnologies addedTechnology = softwareTechnologiesService
+//				.getTechnologiesBySoftwareId(softwareTechnologyId);
+		SoftwareTechnologies addedTechnology = softwareTechnologiesRepository.findById(softwareTechnologyId)
+				.orElseThrow(SoftwareTechnologiesNotFoundException::new);
+		Software software = softwareRepository.findByNameEqualsIgnoreCase(softwareRequest.getName());
+		software.addSoftwareTechnologies(addedTechnology);
+		return toModel(softwareRepository.save(software));
 	}
 
 }

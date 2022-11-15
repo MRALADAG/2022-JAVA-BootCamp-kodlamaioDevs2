@@ -3,6 +3,7 @@ package kodlama.io.Devs2.business.abstracts;
 import java.util.List;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesRequest;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesResponse;
+import kodlama.io.Devs2.entities.concretes.SoftwareTechnologies;
 
 public interface SoftwareTechnologiesService {
 
@@ -18,6 +19,8 @@ public interface SoftwareTechnologiesService {
 
 	List<SoftwareTechnologiesResponse> getAllSoftwareTechnologies();
 
-	SoftwareTechnologiesResponse getTechnologiesBySoftwareId(int softwareId);
+	SoftwareTechnologies getTechnologiesBySoftwareId(int softwareId) throws Exception;
+
+	SoftwareTechnologiesResponse findTechnologiesById(int softwareTechnologyid) throws Exception;
 
 }
