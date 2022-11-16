@@ -3,11 +3,9 @@ package kodlama.io.Devs2.business.concretes;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import kodlama.io.Devs2.business.abstracts.SoftwareService;
 import kodlama.io.Devs2.business.abstracts.SoftwareTechnologiesService;
@@ -17,7 +15,6 @@ import kodlama.io.Devs2.core.exceptions.SoftwareTechnologiesNameNotEmptyExceptio
 import kodlama.io.Devs2.core.exceptions.SoftwareTechnologiesNameNotEqualException;
 import kodlama.io.Devs2.core.exceptions.SoftwareTechnologiesNotFoundException;
 import kodlama.io.Devs2.core.utilities.CheckValidityForSoftwareTechnologies;
-import kodlama.io.Devs2.dataAccess.abstracts.SoftwareRepository;
 import kodlama.io.Devs2.dataAccess.abstracts.SoftwareTechnologiesRepository;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesRequest;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesResponse;
@@ -200,6 +197,7 @@ public class SoftwareTechnologiesManager implements SoftwareTechnologiesService 
 		SoftwareTechnologiesResponse response = new SoftwareTechnologiesResponse();
 		response.setId(softwareTechnologies.getId());
 		response.setName(softwareTechnologies.getName());
+		response.setSoftwareId(softwareTechnologies.getSoftware().getId());
 		return response;
 	}
 

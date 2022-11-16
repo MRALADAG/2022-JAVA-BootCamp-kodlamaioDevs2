@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.Devs2.business.abstracts.SoftwareTechnologiesService;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesRequest;
 import kodlama.io.Devs2.dtos.softwareTechnology.SoftwareTechnologiesResponse;
-import kodlama.io.Devs2.entities.concretes.SoftwareTechnologies;
 
 @RestController
 @RequestMapping("/api/softwaretechnologies")
